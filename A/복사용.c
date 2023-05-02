@@ -1,4 +1,3 @@
-//Ω√¿€
 #include "header.h"
 
 

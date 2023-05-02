@@ -1,12 +1,11 @@
-//½ÃÀÛ
-#include "header.h"
+ï»¿#include "header.h"
 
 
 
 int main()
 {
 
-
+	// í•œê¸€ ë˜ë‚˜ì—¬~?
 
 
 
