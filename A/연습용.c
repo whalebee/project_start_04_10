@@ -1,27 +1,30 @@
-﻿#include "header.h"
+﻿// start
+#include "header.h"
 
 
 
 int main()
 {
-	char input[10];
-	int dummy = 0; // int로 받을거임
+	FILE* p_file = fopen("test.txt", "rt"); // at로 하면 이상하게 나와서 rt 읽기 전용으로 모드를 바꿈
+	char read[50];
 
-	// stdin : 표준입력버퍼 (받아오는 곳을 지정해주는 자리에 stdin이 쓰인 것)
-	fgets(input, sizeof(input), stdin);
-	printf("%s \n", input); // 9개의 결과가 나오게 됨
+	if (NULL != p_file)
+	{
+		fgets(read, sizeof(read), p_file);
+		printf("%s", read);
 
+		fgets(read, sizeof(read), p_file);
+		printf("%s", read);
 
-	printf("버퍼에 남아있는 내용ㅎㅎ : ");
-	do {
-		dummy = getchar(); // 버퍼에 있는거 가져와잉
-		printf("%c ", dummy);
-	} while (dummy != '\n');
+		fseek(p_file, 5, SEEK_SET);	// SEEK_SET 맨 처음으로 !
+		fgets(read, sizeof(read), p_file);
+		printf("%s", read);
 
-
-
-
-
+	}
+	else
+	{
+		printf("ERR(%d) : %s \n", errno, strerror(errno));
+	}
 
 	return 0;
 }

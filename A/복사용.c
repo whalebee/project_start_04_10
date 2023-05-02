@@ -1,12 +1,10 @@
+// start
 #include "header.h"
 
 
 
 int main()
 {
-
-
-
 
 
 
