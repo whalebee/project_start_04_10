@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="1-몰루.c">
+    <ClCompile Include="1-비트와 전처리기.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -33,6 +33,9 @@
     <ClCompile Include="exe.c">
       <Filter>리소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="05_02.c">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header.h">
