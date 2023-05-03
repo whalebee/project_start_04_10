@@ -621,7 +621,7 @@ int main()
 int main()
 {
 	//파일 오픈 : fopen()
-	FILE* p_file = fopen("test.txt", "at");
+	FILE* p_file = fopen("test.txt", "at"); // mode에 따라 다르게 써짐, at면 이어쓰고 wt면 덮어쓰고 ~ rt면 읽고 !
 
 	char read[50];
 	char haha[50];
@@ -634,7 +634,7 @@ int main()
 		// 파일 쓰기
 		// fputs("파일쓰기", p_file);
 		// fscanf(p_file, "%[^\n]s", read);
-		// fprintf(p_file, "Hello");		// mode에 따라 다르게 써짐, at면 이어쓰고 wt면 덮어쓰고 ~
+		// fprintf(p_file, "Hello");		
 		chk = scanf("%s", haha);
 		fprintf(p_file, haha);
 

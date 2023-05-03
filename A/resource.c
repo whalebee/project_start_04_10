@@ -152,3 +152,23 @@ void test3(char str1[], char str2[])
 
 	// printf("%s %s \n", str1, str2);
 }
+
+
+// 내가 입력한 숫자만큼 출력 ex) 5 -> 5,4,3,2,1
+void fn_recursive(int num)
+{
+	if (num <= 0) return;
+	printf("재귀함수 num %d \n", num);
+
+	fn_recursive(--num); // num-- 하면 무한반복임ㅋㅋ
+}
+
+// 내가 입력한 숫자만큼 출력 ex) 5 -> 1,2,3,4,5
+void fn_recursive2(int num)
+{
+	if (num <= 0) return;
+	
+	fn_recursive2(num-1);
+	
+	printf("%재귀함수 num %d \n", num);
+}

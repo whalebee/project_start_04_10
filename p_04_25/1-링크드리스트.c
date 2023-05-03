@@ -154,9 +154,11 @@ int main()
 			// (*p_find).p_next 를 줄인 것
 			while (p_find->p_next != NULL)
 			{
-				p_find = p_find->p_next; // 다음 주소 넣어줘서 반복시키기
+				p_find = p_find->p_next; 
+				// 다음 주소 넣어줘서 마지막 노드가 나올 때까지 반복시키기
 			}
 
+			// 마지막 노드 나오면 새로 만든 temp에 연결
 			p_find->p_next = temp;
 		}
 	}
@@ -185,7 +187,7 @@ int main()
 		}
 	}
 
-	void append_first(NODE** pp, int number) // 몰루..
+	void append_first(NODE** pp, int number) 
 	{
 		NODE* temp = malloc(sizeof(NODE));
 		if (temp == NULL)
@@ -195,6 +197,8 @@ int main()
 		}
 		temp->number = number;
 		temp->p_next = *pp;  // 새로운 노드의 다음 노드로 기존의 헤더 노드를 지정
+		// 헤더가 가지고 있었던 p_next를 받는 것
+
 		*pp = temp;  // pp가 가리키는 주소값을 새로운 노드의 주소값으로 변경
 
 

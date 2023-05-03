@@ -46,9 +46,10 @@ void test3(char str1[], char str2[]); // 문자열 예제 3번 : 문자열을 �
 #pragma endregion
 
 
-#pragma region 
+#pragma region 05-03
+void fn_recursive(int); // 내가 입력한 숫자만큼 출력 ex) 5 -> 5,4,3,2,1
 
-
+void fn_recursive2(int); // 이번엔 ex) 5 -> 1,2,3,4,5
 
 #pragma endregion
 
