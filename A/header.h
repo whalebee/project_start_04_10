@@ -3,7 +3,7 @@
 #include <stdlib.h>		// atoi, rand, malloc, free 등
 #include <conio.h>		// 05-02 : getch
 #include <errno.h>		// 05-02 : errno 사용하기 위함
-
+#include <mysql.h>		// 05-04 : mysql이랑 연동
 
 
 

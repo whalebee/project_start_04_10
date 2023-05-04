@@ -5,9 +5,7 @@
 
 int main()
 {
-	// fn_recursive(3);
 
-	fn_recursive2(5);
 
 
 
