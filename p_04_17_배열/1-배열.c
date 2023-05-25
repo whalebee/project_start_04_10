@@ -42,7 +42,7 @@ int main()
 	{
 		printf("오류");
 		return 1;
-	}
+	} 
 
 	printf("입력한 값은 %d년 %d월 %d일 \n", yy, mm, dd);
 
