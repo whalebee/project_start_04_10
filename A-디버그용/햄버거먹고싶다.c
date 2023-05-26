@@ -1,17 +1,29 @@
-#include <stdio.h>
-
-union data {
-	char c1;
-	short num1;
-	int num2;
-};
+#include "header.h"
 
 
-void main() 
+int main()
 {
-	union data d1;
-	d1.num2 = 0x12345678;
-	printf("%x", d1.num1);
+
+	// n단트리 for문 2번만 사용해서
+
+	int n = 3;
+
+	for (int row = 1; row < n; row++)
+	{
+
+		for (int col = 1; col < n + row; col++)
+		{
+			if (col < n - row)
+			{
+				printf("* ");
+			}
+			else
+			{
+				printf("g");
+			}
+		}
+	}
+
 
 	return 0;
 }
