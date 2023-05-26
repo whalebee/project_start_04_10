@@ -276,7 +276,7 @@ int main()
 
 
 			/*
-					for (int i = 0; i < grade_max; i++)
+			for (int i = 0; i < grade_max; i++)
 			{
 				for (int j = 0; j < 3; j++)
 				{
