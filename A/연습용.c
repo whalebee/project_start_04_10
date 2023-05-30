@@ -1,112 +1,204 @@
-﻿#include "header.h"
+﻿// start
+#include "header.h"
 
+// 구조체 선언
+typedef struct my_class
+{
+	char name[20];
+	unsigned int korean_score;
+	unsigned int english_score;
+	unsigned int math_score;
+	unsigned int sum_score;
+	float avg_score;
+	struct my_class* next;
+}MYCLASS;
+
+
+// 입력 함수만들기 -> void형으로 만들어도 될 듯? -> int형으로 return을 써서 잘 되는지 확인해보자
+// 매개변수는 어떻게 할까 -> 주소값을 사용해야하니까 이중으로 받아야 할 듯
+int writing_info(MYCLASS** p_info);
+
+// 출력 함수만들기
+void show_info(MYCLASS* p_info);
+
+// 등수 함수만들기 -> 매개변수는?
+int get_rank(MYCLASS* p_info, int sum);
 
 
 int main()
 {
-	// 소문자 대문자
-	// 쓸데없는 변수
-	// 최적화
-
 	/*
-	1. limit_student는 동적할당이 잘 되었는지 체크를 안했고							-ch
-	2. 동적할당이 만약 실패했더라도 free함수를 들어가게 코딩되어 있네요.			return 으로 종료시킴
-	3. 같은 맥락에서 할당이 실패한 경우에도 점수 확인을 하고 있음.					return 으로 종료시킴
-	4. sum/avg를 굳이 다 가지고 있을 필요는 없습니다.								-ch
-	5. sum/avg는 int형으로 표현하는 것이 나을 것 같다는 뜻.							-ch
-	6. 배열표현과 포인터 표현을 혼용하지 마시고 일치시키는 게 좋을 것 같습니다.		-ch
+	[menu]
+	1. 성적 입력
+	2. 성적 확인
+	3. 종료
+	-------------
+	선택(1~3) :
+
+	######################
+	1번 메뉴 선택 시 입력
+	######################
+	n번째 학생이름 :
+	국어 점수 :
+	영어 점수 :
+	수학 점수 :
+
+	######################
+	2번 메뉴 선택 시 출력
+	######################
+
+	---------------------------------------------------------
+	이름		국어	영어	수학	총점	평균	등수
+	---------------------------------------------------------
+	김완종		100		100		100		300		100		1
+
+
+
+	평균은 소수점을.. 정수를...? 어떻게 처리할까 평균은 중요하니까 float로 하자
+	등수..... 예전에 총점을 같이 넘겨줘서 편하게 했었던게 기억이 나는데에...흐으으음...
 	*/
 
-	// 반수(미정)와 각 학급의 인원(미정)을 각각 입력 받아 다차원 포인터를 동적할당하고,
-	// 각 학생의 점수를 입력 받아서 학급별 평균을 출력하세요.
+	MYCLASS* info_head = NULL;
+	int num = 0;
 
-	// 반수 -> 행
-	// 학급의 인원 -> 열
-
-	int limit_grade = 0, score = 0, sum = 0, avg = 0;
-
-	int** myClass = 0;
-	int* limit_student = 0;
-
-
-
-	printf("몇 반까지 있나? :");
-	scanf("%d", &limit_grade);
-
-	myClass = (int**)malloc(sizeof(int*) * limit_grade); // 행
-	limit_student = (int*)malloc(sizeof(int) * limit_grade); // 결과물 출력용
-
-
-	if (myClass != NULL && limit_student != NULL)
+	while (1)
 	{
-		for (int i = 0; i < limit_grade; i++)
+		puts(" ");
+		printf("[menu]\n");
+		printf("1. 성적 입력\n");
+		printf("2. 성적 확인\n");
+		printf("3. 종료\n");
+		printf("-------------\n");
+		printf("선택 ( 1 ~ 3 ) : ");
+		scanf("%d", &num);
+		getchar(); // 숫자가 아닌 문자를 입력했을 때 무한루프를 방지하기 위한 버퍼제거 함수
+
+		if (num == 1)
 		{
-			printf("%d학년 학생 수를 입력 : \n", i + 1);
-			scanf("%d", limit_student+i);
-
-			myClass[i] = (int*)malloc(sizeof(int) * limit_student[i]); // 열
-
-			if (myClass[i] != NULL)
+			if (writing_info(&info_head) == 1)
 			{
-				
-				for(int j = 0; j < limit_student[i]; j++)
-				{
-					printf("%d학년 %d번째 학생의 점수를 입력 : ", i + 1, j + 1);
-					scanf("%d", &score);
-					myClass[i][j] = score;
-					// sum += score;
-				}
+				printf("입력 완료 ! \n");
 			}
-			else
-			{
-				printf("할당이 안되었소.  \n");
-				return 0;
-			}
-			// printf("%d 학년의 총점 : %d \n", i+1, sum);
 		}
-		
+		else if (num == 2)
+		{
+			show_info(info_head);
+		}
+		else if (num == 3)
+		{
+			printf("menu를 종료합니다 :D \n");
+			break;
+		}
+		else
+		{
+			printf("선택된 번호만 입력해야죠? ( 1 ~ 3 ) \n");
+		}
 	}
-	else
+
+	return 0;
+}
+
+int writing_info(MYCLASS** p_info)
+{
+	static int count = 0; // n번째 학생을 위한
+	printf("######################\n");
+	printf("1번 메뉴 선택 시 입력\n");
+	printf("######################\n");
+	count++;
+
+	MYCLASS* new_temp = NULL;
+
+	new_temp = (MYCLASS*)malloc(sizeof(MYCLASS));
+	if (new_temp == NULL)
 	{
-		printf("myClass 메모리 할당 실패 ! \n");
+		printf("메모리 할당 오류 \n");
 		return 0;
 	}
-	
 
-	// 확인
-	for (int i = 0; i < limit_grade; i++)
+	printf("%d번째 학생의 이름 : ", count);
+	scanf("%s", new_temp->name);
+
+	// %d 보다 %u쓰자 unsigned int 했으면.
+	printf("국어 점수 : ");
+	scanf("%u", &new_temp->korean_score);
+
+	printf("영어 점수 : ");
+	scanf("%u", &new_temp->english_score);
+
+	printf("수학 점수 : ");
+	scanf("%u", &new_temp->math_score);
+
+
+	new_temp->sum_score = new_temp->korean_score + new_temp->english_score + new_temp->math_score;
+	new_temp->avg_score = (float)new_temp->sum_score / 3.0f;
+	new_temp->next = NULL;
+
+	// 노드가 없을 때
+	if (*p_info == NULL)
 	{
-		sum = 0;
-		for (int j = 0; j < limit_student[i]; j++)
-		{
-			sum += myClass[i][j];
-		}
-		avg = sum / limit_student[i];
 
-		printf("%d학년의 총점 %d ,", i + 1, sum);
-		printf("평균 %d , ", avg);
-		printf("%d학년 전체 점수 : ", i + 1);
-		for (int j = 0; j < limit_student[i]; j++)
-		{
-			printf("%d점 ", myClass[i][j]);
-		}
-		puts(" ");
+		*p_info = new_temp;
+
+		return 1;
 	}
-
-
-	// 해제
-	printf("메모리 할당 해제 시작 \n");
-
-	// 2차원 해제
-	for (int f = 0; f < limit_grade; f++)
+	else // 첫 노드가 아니면
 	{
-		free(myClass[f]);
-	}
 
-	// 1차원 해제
-	free(myClass);
-	free(limit_student);
+		// 맨 끝 노드까지 가기위한 current(cur) 변수
+		MYCLASS* cur = *p_info;
+		while (cur->next != NULL)
+		{
+			cur = cur->next;
+		}
+
+		cur->next = new_temp;
+
+		return 1;
+	}
 
 
 	return 0;
+}
+
+void show_info(MYCLASS* p_info)
+{
+	printf("###################### \n");
+	printf("2번 메뉴 선택 시 출력 \n");
+	printf("###################### \n");
+	puts(" ");
+	printf("---------------------------------------------------------------------------- \n");
+	printf("이름		국어	영어	수학	총점	평균	등수\n");
+	printf("---------------------------------------------------------------------------- \n");
+
+	MYCLASS* cur = p_info;
+
+	if (cur == NULL)
+	{
+		printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@ 확인할 정보가 없어요 @@@@@@@@@@@@@@@@@@@@@@@@@@@ \n");
+	}
+
+	while (cur != NULL)
+	{
+		printf("%-15s	%2u	%2u	%2u	%2u	%.1f	%2d", cur->name, cur->korean_score, cur->english_score, cur->math_score
+			, cur->sum_score, cur->avg_score, get_rank(cur, cur->sum_score));
+		puts(" ");
+		cur = cur->next;
+	}
+}
+
+int get_rank(MYCLASS* p_info, unsigned int sum)
+{
+	int rank = 1;
+
+	while (p_info != NULL)
+	{
+		if (p_info->sum_score < sum)
+		{
+			rank++;
+		}
+
+		p_info = p_info->next;
+	}
+
+	return rank;
 }
