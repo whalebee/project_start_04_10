@@ -1,6 +1,11 @@
 ﻿// start
 #include "header.h"
 
+/*
+	완성했음 -> ㄴㄴ 해제 안 했음
+*/
+
+
 // 구조체 선언
 typedef struct my_class
 {
@@ -14,6 +19,7 @@ typedef struct my_class
 }MYCLASS;
 
 
+
 // 입력 함수만들기 -> void형으로 만들어도 될 듯? -> int형으로 return을 써서 잘 되는지 확인해보자
 // 매개변수는 어떻게 할까 -> 주소값을 사용해야하니까 이중으로 받아야 할 듯
 int writing_info(MYCLASS** p_info);
@@ -22,7 +28,7 @@ int writing_info(MYCLASS** p_info);
 void show_info(MYCLASS* p_info);
 
 // 등수 함수만들기 -> 매개변수는?
-int get_rank(MYCLASS* p_info, int sum);
+int get_rank(MYCLASS* p_info, unsigned int sum);
 
 
 int main()
@@ -94,6 +100,9 @@ int main()
 			printf("선택된 번호만 입력해야죠? ( 1 ~ 3 ) \n");
 		}
 	}
+
+
+
 
 	return 0;
 }
@@ -180,7 +189,7 @@ void show_info(MYCLASS* p_info)
 	while (cur != NULL)
 	{
 		printf("%-15s	%2u	%2u	%2u	%2u	%.1f	%2d", cur->name, cur->korean_score, cur->english_score, cur->math_score
-			, cur->sum_score, cur->avg_score, get_rank(cur, cur->sum_score));
+			, cur->sum_score, cur->avg_score, get_rank(p_info, cur->sum_score));
 		puts(" ");
 		cur = cur->next;
 	}
@@ -190,15 +199,17 @@ int get_rank(MYCLASS* p_info, unsigned int sum)
 {
 	int rank = 1;
 
+
 	while (p_info != NULL)
 	{
-		if (p_info->sum_score < sum)
+		if (p_info->sum_score > sum)
 		{
 			rank++;
 		}
 
 		p_info = p_info->next;
 	}
+
 
 	return rank;
 }
