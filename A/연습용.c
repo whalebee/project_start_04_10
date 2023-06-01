@@ -1,11 +1,6 @@
 ﻿// start
 #include "header.h"
 
-/*
-	완성했음 -> ㄴㄴ 해제 안 했음
-*/
-
-
 // 구조체 선언
 typedef struct my_class
 {
@@ -16,54 +11,18 @@ typedef struct my_class
 	unsigned int sum_score;
 	float avg_score;
 	struct my_class* next;
+	unsigned int rank;
 }MYCLASS;
 
-
-
-// 입력 함수만들기 -> void형으로 만들어도 될 듯? -> int형으로 return을 써서 잘 되는지 확인해보자
-// 매개변수는 어떻게 할까 -> 주소값을 사용해야하니까 이중으로 받아야 할 듯
 int writing_info(MYCLASS** p_info);
 
-// 출력 함수만들기
 void show_info(MYCLASS* p_info);
 
-// 등수 함수만들기 -> 매개변수는?
-int get_rank(MYCLASS* p_info, unsigned int sum);
-
+void delete_list(MYCLASS** p_info);
 
 int main()
 {
-	/*
-	[menu]
-	1. 성적 입력
-	2. 성적 확인
-	3. 종료
-	-------------
-	선택(1~3) :
-
-	######################
-	1번 메뉴 선택 시 입력
-	######################
-	n번째 학생이름 :
-	국어 점수 :
-	영어 점수 :
-	수학 점수 :
-
-	######################
-	2번 메뉴 선택 시 출력
-	######################
-
-	---------------------------------------------------------
-	이름		국어	영어	수학	총점	평균	등수
-	---------------------------------------------------------
-	김완종		100		100		100		300		100		1
-
-
-
-	평균은 소수점을.. 정수를...? 어떻게 처리할까 평균은 중요하니까 float로 하자
-	등수..... 예전에 총점을 같이 넘겨줘서 편하게 했었던게 기억이 나는데에...흐으으음...
-	*/
-
+	
 	MYCLASS* info_head = NULL;
 	int num = 0;
 
@@ -77,7 +36,7 @@ int main()
 		printf("-------------\n");
 		printf("선택 ( 1 ~ 3 ) : ");
 		scanf("%d", &num);
-		getchar(); // 숫자가 아닌 문자를 입력했을 때 무한루프를 방지하기 위한 버퍼제거 함수
+		getchar(); 
 
 		if (num == 1)
 		{
@@ -101,15 +60,14 @@ int main()
 		}
 	}
 
-
-
+	delete_list(&info_head);
 
 	return 0;
 }
 
 int writing_info(MYCLASS** p_info)
 {
-	static int count = 0; // n번째 학생을 위한
+	static int count = 0; 
 	printf("######################\n");
 	printf("1번 메뉴 선택 시 입력\n");
 	printf("######################\n");
@@ -127,7 +85,6 @@ int writing_info(MYCLASS** p_info)
 	printf("%d번째 학생의 이름 : ", count);
 	scanf("%s", new_temp->name);
 
-	// %d 보다 %u쓰자 unsigned int 했으면.
 	printf("국어 점수 : ");
 	scanf("%u", &new_temp->korean_score);
 
@@ -137,15 +94,17 @@ int writing_info(MYCLASS** p_info)
 	printf("수학 점수 : ");
 	scanf("%u", &new_temp->math_score);
 
-
 	new_temp->sum_score = new_temp->korean_score + new_temp->english_score + new_temp->math_score;
 	new_temp->avg_score = (float)new_temp->sum_score / 3.0f;
 	new_temp->next = NULL;
 
+
+	new_temp->rank = 1;
+
+
 	// 노드가 없을 때
 	if (*p_info == NULL)
 	{
-
 		*p_info = new_temp;
 
 		return 1;
@@ -153,14 +112,37 @@ int writing_info(MYCLASS** p_info)
 	else // 첫 노드가 아니면
 	{
 
-		// 맨 끝 노드까지 가기위한 current(cur) 변수
 		MYCLASS* cur = *p_info;
-		while (cur->next != NULL)
+		MYCLASS* else_temp = NULL;
+		int cur_rank = 1;
+
+		
+		while (cur != NULL && cur->sum_score >= new_temp->sum_score)
 		{
+			else_temp = cur; 
+			cur = cur->next; 
+			cur_rank++; 
+		}
+		
+		while (cur != NULL && cur->sum_score < new_temp->sum_score)
+		{
+			else_temp = cur;
+			cur->rank = cur->rank + 1;
 			cur = cur->next;
 		}
 
-		cur->next = new_temp;
+		new_temp->rank = cur_rank;
+
+		if (else_temp == NULL) 
+		{
+			new_temp->next = *p_info;
+			*p_info = new_temp;
+		}
+		else 
+		{
+			else_temp->next = new_temp;
+			new_temp->next = NULL;
+		}
 
 		return 1;
 	}
@@ -189,27 +171,20 @@ void show_info(MYCLASS* p_info)
 	while (cur != NULL)
 	{
 		printf("%-15s	%2u	%2u	%2u	%2u	%.1f	%2d", cur->name, cur->korean_score, cur->english_score, cur->math_score
-			, cur->sum_score, cur->avg_score, get_rank(p_info, cur->sum_score));
+			, cur->sum_score, cur->avg_score, cur->rank);
 		puts(" ");
 		cur = cur->next;
 	}
 }
 
-int get_rank(MYCLASS* p_info, unsigned int sum)
-{
-	int rank = 1;
-
-
-	while (p_info != NULL)
-	{
-		if (p_info->sum_score > sum)
-		{
-			rank++;
+void delete_list(MYCLASS** p_info) {
+	if (*p_info != NULL) {
+		MYCLASS* cur = *p_info;
+		MYCLASS* next = NULL;
+		while (cur != NULL) {
+			next = cur->next;
+			free(cur);
+			cur = next;
 		}
-
-		p_info = p_info->next;
 	}
-
-
-	return rank;
-}
+};
