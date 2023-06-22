@@ -7,7 +7,7 @@
 int main()
 {
 
-	printf("gg");
+	
 
 
 

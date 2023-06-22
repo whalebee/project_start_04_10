@@ -43,6 +43,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "p_05_04", "p_05_04\p_05_04.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "p_06_09_링크드리스트", "p_06_09\p_06_09.vcxproj", "{D12C752C-699C-4724-A294-EFCF6D478C04}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "p_06_22_함수응용", "p_06_22_함수응용\p_06_22_함수응용.vcxproj", "{21C59166-C718-45C2-BD2A-B543CBD5EC1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -211,6 +213,14 @@ Global
 		{D12C752C-699C-4724-A294-EFCF6D478C04}.Release|x64.Build.0 = Release|x64
 		{D12C752C-699C-4724-A294-EFCF6D478C04}.Release|x86.ActiveCfg = Release|Win32
 		{D12C752C-699C-4724-A294-EFCF6D478C04}.Release|x86.Build.0 = Release|Win32
+		{21C59166-C718-45C2-BD2A-B543CBD5EC1C}.Debug|x64.ActiveCfg = Debug|x64
+		{21C59166-C718-45C2-BD2A-B543CBD5EC1C}.Debug|x64.Build.0 = Debug|x64
+		{21C59166-C718-45C2-BD2A-B543CBD5EC1C}.Debug|x86.ActiveCfg = Debug|Win32
+		{21C59166-C718-45C2-BD2A-B543CBD5EC1C}.Debug|x86.Build.0 = Debug|Win32
+		{21C59166-C718-45C2-BD2A-B543CBD5EC1C}.Release|x64.ActiveCfg = Release|x64
+		{21C59166-C718-45C2-BD2A-B543CBD5EC1C}.Release|x64.Build.0 = Release|x64
+		{21C59166-C718-45C2-BD2A-B543CBD5EC1C}.Release|x86.ActiveCfg = Release|Win32
+		{21C59166-C718-45C2-BD2A-B543CBD5EC1C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
