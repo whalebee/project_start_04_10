@@ -2,28 +2,37 @@
 // #include "header.h"
 #include <stdio.h>
 
-
+void fibo(int n);
 
 int main()
 {
+	int n;
 
-	// A , Z 해보셈
+	printf("input: ");
+	scanf_s("%d", &n);
 
-	int A, Z, result;
-
-	for (A = 0; A < 10; A++)
-	{
-		for (Z = 0; Z < 10; Z++)
-		{
-			result = (A * 10 + Z) + (Z * 10 + A);
-			if (result == 99)
-				printf("%d%d + %d%d = %d \n", A, Z, Z, A, result);
-		}
-	}
-	
-
-
-
+	fibo(n);
 
 	return 0;
+}
+
+void fibo(int n)
+{
+	// 변수 4개
+	int v1 = 0, v2 = 1, temp = 0, i;
+	//printf("%d %d ", v1, v2);
+	//for (i = 2; i < n; i++)
+	//{
+	//	temp = v1 + v2;
+	//	v1 = v2;
+	//	v2 = temp;
+	//	printf("%d ", temp);
+	//}
+	for (i = 0; i < n; i++)
+	{
+		printf("%d ", v1);
+		temp = v1;
+		v1 += v2;
+		v2 = temp;
+	}
 }
