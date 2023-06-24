@@ -18,21 +18,12 @@ int main()
 
 void fibo(int n)
 {
-	// º¯¼ö 4°³
-	int v1 = 0, v2 = 1, temp = 0, i;
-	//printf("%d %d ", v1, v2);
-	//for (i = 2; i < n; i++)
-	//{
-	//	temp = v1 + v2;
-	//	v1 = v2;
-	//	v2 = temp;
-	//	printf("%d ", temp);
-	//}
+	int i, start = 0, next = 1, temp;
 	for (i = 0; i < n; i++)
 	{
-		printf("%d ", v1);
-		temp = v1;
-		v1 += v2;
-		v2 = temp;
+		temp = start;
+		start += next;
+		next = temp;
+		printf("%d ", start);
 	}
 }

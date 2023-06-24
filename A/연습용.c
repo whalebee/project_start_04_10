@@ -18,13 +18,13 @@ int main()
 
 void fibo(int n)
 {
-	int start = 0, next = 1, before, i;
-
+	int i, start = 0, next = 1, temp;
 	for (i = 0; i < n; i++)
 	{
 		printf("%d ", start);
-		before  = start;
+		temp = start;
 		start += next;
-		next = before;
+		next = temp;
+		
 	}
 }
