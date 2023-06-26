@@ -61,13 +61,14 @@ int main()
 	int getMaxValue(int v1, int v2, int v3)
 	{
 		if (v1 > v2)	return v1 > v3 ? v1 : v3;
-		else				return v2 > v3 ? v2 : v3;
+		else			return v2 > v3 ? v2 : v3;
+		// else°¡ ¾ø¾îµµ µÊ.
 	}
 
 	int getMixValue(int v1, int v2, int v3)
 	{
 		if (v1 < v2)	return v1 < v3 ? v1 : v3;
-		else				return v2 < v3 ? v2 : v3;
+		else			return v2 < v3 ? v2 : v3;
 	}
 
 
@@ -95,13 +96,13 @@ int main()
 		{
 		case 1:
 			printf("¼·¾¾ ÀÔ·Â: ");
-			scanf_s("%lf", &degree);
-			printf("º¯È­µÈ È­¾¾: %.1lf \n", CelToFah(degree));
+			scanf_s("%f", &degree);
+			printf("º¯È­µÈ È­¾¾: %.1f \n", CelToFah(degree));
 			break;
 		case 2:
 			printf("È­¾¾ ÀÔ·Â: ");
-			scanf_s("%lf", &degree);
-			printf("º¯È­µÈ ¼·¾¾: %.1lf \n", FahToCel(degree));
+			scanf_s("%f", &degree);
+			printf("º¯È­µÈ ¼·¾¾: %.1f \n", FahToCel(degree));
 			break;
 		default:
 			printf("1°ú 2Áß¿¡ ¼±ÅÃÇÏ¼Å¾ßµË´Ï´Ù. \n");
@@ -137,6 +138,12 @@ int main()
 		printf("input: ");
 		scanf_s("%d", &n);
 
+		if (n < 1)
+		{
+			printf("1 ÀÌ»óÀÇ °ªÀ» ÀÔ·ÂÇØ¾ßÇÑ´Ù ! \n");
+			return -1;
+		}
+
 		fibo(n);
 
 		return 0;
@@ -152,6 +159,24 @@ int main()
 			before = start;
 			start += next;
 			next = before;
+		}
+	}
+
+	// ºÀ½Ü¹æ¹ý
+	void fibo(int n)
+	{
+		int f1 = 0, f2 = 1, f3, i;
+
+		f3 = f1 + f2;
+		if (num == 1) printf("%d ", f1);
+		else			printf("%d %d ", f1, f2);
+
+		for (i = 0; i < num - 2; i++)
+		{
+			f3 = f1 + f2;
+			printf("%d ", f3);
+			f1 = f2;
+			f2 = f3;
 		}
 	}
 
